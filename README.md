@@ -19,9 +19,3 @@ Placer des remplacements dans le tableau
 LF: Visualiser les remplacements proposés
 MLL : Visualiser les déplacements soumis
 ME : Visualisation des propositions de repas
-
-
-
-
-
-
