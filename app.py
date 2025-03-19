@@ -43,7 +43,7 @@ def login():
             if utilisateurs[login] == "azerty*123":
                 return redirect(url_for('changer_mot_de_passe'))
             else:
-                return "Connexion réussie"
+                return render_template('index.html')
 
         else:
             return "Identifiants incorrects", 401
