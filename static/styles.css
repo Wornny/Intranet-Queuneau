@@ -278,3 +278,21 @@ button.coco:hover {
     animation: apparition 2s ease-out;
 }
 
+/* Style pour le lien "Changer mon avatar" */
+a.coco {
+    display: inline-block; /* Permet de traiter le lien comme un bouton */
+    padding: 10px 20px; /* Espacement autour du texte */
+    font-size: 1.2rem; /* Taille de la police */
+    color: #fff; /* Couleur du texte */
+    background: #ff7eb3; /* Fond de couleur rose */
+    text-align: center;
+    border-radius: 5px; /* Coins arrondis */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+    transition: all 0.3s ease; /* Transition pour un effet fluide au survol */
+}
+
+a.coco:hover {
+    background: #ff4f8b; /* Changer la couleur au survol */
+    transform: scale(1.05); /* Légère animation d'agrandissement */
+    box-shadow: 0 0 10px rgba(0, 255, 171, 0.3); /* Légère ombre portée au survol */
+}
