@@ -19,7 +19,7 @@ def remplacement():
             fieldnames = new_message[0].keys()
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-            r
+            
             csvfile.seek(0, 2)  
             if csvfile.tell() == 0:
                 writer.writeheader()
