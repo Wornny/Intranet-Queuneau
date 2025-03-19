@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Assurez-vous que le chemin vers le fichier CSS est correct -->
+</head>
+<body class="corentin">
+    <div class="container pcpei">
+        <h1 class="coco">Se Connecter</h1>
+        <form action="/login" method="post">
+            <label for="login">Identifiant :</label>
+            <input type="text" id="login" name="login" class="coco" required><br>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" name="password" class="coco" required><br>
+            <button type="submit" class="coco">Se Connecter</button>
+        </form>
+    </div>
+</body>
+</html>
