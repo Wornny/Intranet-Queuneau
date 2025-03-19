@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Plats proposés</h1>
+
+    <!-- Liste des plats -->
+    <ul class="menu">
+        {% for plat in plats %}
+            <li>
+                <div class="details">
+                    <h2>{{ plat.nom }}</h2>
+                    <p><strong>Jour : </strong>{{ plat.jour }}</p>
+                </div>
+                <div class="votes">
+                    <form action="/vote/{{ loop.index0 }}/like" method="POST" class="vote-form">
+                        <button type="submit" class="like-btn">
+                            <i class="fas fa-thumbs-up"></i>
+                        </button>
+                    </form>
+                    <span>Likes: {{ plat.likes }}</span>
+                    <form action="/vote/{{ loop.index0 }}/dislike" method="POST" class="vote-form">
+                        <button type="submit" class="dislike-btn">
+                            <i class="fas fa-thumbs-down"></i>
+                        </button>
+                    </form>
+                    <span>Dislikes: {{ plat.dislikes }}</span>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Formulaire pour ajouter un plat -->
+    <h3>Proposez un plat</h3>
+    <form action="/ajouter_plat" method="POST">
+        <input type="text" name="nouveauPlat" placeholder="Nom du plat" required>
+        <select name="jour" required>
+            <option value="Lundi">Lundi</option>
+            <option value="Mardi">Mardi</option>
+            <option value="Mercredi">Mercredi</option>
+            <option value="Jeudi">Jeudi</option>
+            <option value="Vendredi">Vendredi</option>
+        </select>
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const likeButtons = document.querySelectorAll('.like-btn');
+            const dislikeButtons = document.querySelectorAll('.dislike-btn');
+
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    let form = this.closest('form');
+                    form.submit();
+                });
+            });
+
+            dislikeButtons.forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    let form = this.closest('form');
+                    form.submit();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
