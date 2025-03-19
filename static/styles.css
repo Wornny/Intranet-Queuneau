@@ -15,10 +15,11 @@ nav {
     top: 0;
     width: 100%;
     z-index: 1000; /* Assure que la navigation est au-dessus des autres éléments */
-    padding: 15px 0;
+    padding: 10px 0; /* Réduit l'espacement vertical pour un alignement parfait */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Ombre sous la barre de navigation */
 }
 
+/* Conteneur de la barre de navigation */
 nav .container {
     display: flex;
     justify-content: space-between; /* Espacement entre les éléments (logo + menu) */
@@ -26,6 +27,16 @@ nav .container {
     padding: 0 20px;
 }
 
+/* Aligner les éléments du menu */
+.navbar-nav {
+    display: flex;
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: center; /* Aligne verticalement */
+    width: 100%; /* Assure que les éléments remplissent l'espace disponible */
+    list-style: none; /* Enlève les puces des listes */
+}
+
+/* Liens de la barre de navigation */
 nav a {
     text-decoration: none;
     color: #fff; /* Couleur des liens */
@@ -33,11 +44,16 @@ nav a {
     font-size: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 1px;
+    display: inline-block; /* Assure que les liens sont en ligne */
+    padding: 8px 15px; /* Padding pour avoir un espacement autour du texte */
     transition: color 0.3s ease;
 }
 
+/* Effet de survol des liens */
 nav a:hover {
     color: #00FFAB; /* Changer la couleur au survol */
+    background-color: rgba(0, 255, 171, 0.2); /* Légère surbrillance en fond au survol */
+    border-radius: 5px; /* Coins arrondis pour un effet moderne */
 }
 
 /* Sections du contenu */
@@ -46,6 +62,7 @@ nav a:hover {
     margin-top: 80px; /* Décalage vers le bas pour ne pas que la nav se superpose */
 }
 
+/* Section des en-têtes */
 .section-heading {
     font-size: 2.5rem;
     letter-spacing: 3px;
@@ -74,23 +91,28 @@ nav a:hover {
     100% { width: 0; }
 }
 
-/* Formulaire */
+/* Autres styles du contenu */
 .form-control {
     background-color: #1a2a3a; /* Fond sombre pour les champs */
     color: #fff; /* Texte blanc */
     border: 1px solid #3d4a56; /* Bordure de champ */
     border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: 20px; /* Augmenter l'espace intérieur des champs */
+    margin-bottom: 20px; /* Espacement entre les champs */
+    font-size: 1.2rem; /* Agrandir la taille du texte */
+    width: 100%; /* S'assurer que les champs occupent toute la largeur du formulaire */
+    box-sizing: border-box; /* Inclure le padding dans la largeur totale */
     transition: all 0.3s ease;
 }
 
+/* Agrandir le texte au focus */
 .form-control:focus {
     border-color: #00FFAB; /* Vert néon pour le focus */
     box-shadow: 0 0 10px rgba(0, 255, 171, 0.5); /* Effet de focus lumineux */
+    font-size: 1.3rem; /* Agrandir encore la taille du texte au focus */
 }
 
-/* Bouton */
+/* Autres boutons et éléments */
 .btn-xl {
     background: linear-gradient(45deg, #00FFAB, #00C9FF); /* Dégradé bleu et vert futuriste */
     border: none;
@@ -109,43 +131,43 @@ nav a:hover {
     box-shadow: 0 0 15px rgba(0, 255, 171, 0.5);
 }
 
-/* Case à cocher */
-.form-check-input {
-    accent-color: #00FFAB; /* Couleur de la case à cocher */
-}
-
-/* Fond de page (contours des sections) */
-.container {
-    background: rgba(0, 0, 0, 0.5); /* Fond légèrement sombre pour donner un effet de transparence */
-    padding: 20px;
-    border-radius: 15px;
-}
-
 /* Formulaire de contact */
 form {
     background: rgba(0, 0, 0, 0.7); /* Fond sombre et moderne */
     border-radius: 10px;
-    padding: 30px;
+    padding: 40px; /* Augmenter le padding pour donner de l'espace autour du formulaire */
+    width: 80%; /* Limiter la largeur du formulaire */
+    max-width: 800px; /* Limiter à une largeur maximale */
+    margin: 0 auto; /* Centrer le formulaire horizontalement */
+    display: flex;
+    flex-direction: column; /* Disposer les champs les uns sous les autres */
+    align-items: center; /* Centrer les éléments horizontalement */
 }
 
-/* Texte de la politique de confidentialité */
-.text-white {
+/* Footer */
+.footer {
+    background-color: #2d3436;
     color: #fff;
-    font-size: 1rem;
+    padding: 50px 0;
+    text-align: center;
+    margin-top: 100px;
+}
+/* Navbar Toggle (Menu Button) */
+.navbar-toggler {
+    font-size: 20px; /* Augmenter la taille du texte */
+    color: #fff;
+    background-color: #f50000; /* Couleur de fond */
+    border: 2px solid #3498db; /* Nouvelle couleur de bordure bleue claire */
+    padding: 10px 20px;
+    border-radius: 5px; /* Angles arrondis */
+    text-transform: uppercase; /* Met le texte en majuscule */
+    font-weight: bold; /* Rendre le texte plus visible */
+    transition: all 0.3s ease;
 }
 
-a {
-    color: #00FFAB;
-    text-decoration: underline;
-    transition: color 0.3s;
-}
-
-a:hover {
-    color: #00C9FF;
-}
-
-/* Animation de survol des boutons */
-button[type="submit"]:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(0, 255, 171, 0.7);
+/* Changer la couleur du bouton au survol */
+.navbar-toggler:hover {
+    background-color: #00FFAB; /* Couleur plus sombre au survol */
+    border-color: #00FFAB; /* Couleur de bordure plus sombre au survol */
+    transform: scale(1.05); /* Légère animation d'agrandissement */
 }
