@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block style %}<link rel="stylesheet" href="{{ url_for('static', filename='message.css') }}">{% endblock %}
+    <!-- Conteneur pour centrer le contenu -->
+    <div class="thank-you-container">
+        <h1>Merci pour votre message</h1>
+    </div>
+{% endblock %}
