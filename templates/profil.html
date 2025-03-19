@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Bienvenue {{ login }}</h1>
+        {% if avatar_path %}
+            <img src="{{ url_for('static', filename='avatars/' + login + '.jpg') }}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%;">
+        {% else %}
+            <img src="{{ url_for('static', filename='assets/default_avatar.jpg') }}" alt="Avatar" style="width: 150px; height: 150px; border-radius: 50%;">
+        {% endif %}
+        <p><a href="/choisir_avatar">Changer mon avatar</a></p>
+    </div>
+{% endblock %}

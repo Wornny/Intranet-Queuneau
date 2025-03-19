@@ -4,11 +4,11 @@
 
 {% block content %}
     <div class="container pcpei">
-        <h1 class="coco">Changez votre mot de passe</h1>
-        <form action="/changer_mot_de_passe" method="POST">
-            <label for="nouveau_mdp" class="coco">Nouveau mot de passe :</label>
+        <h1 class="coco">Changer votre mot de passe</h1>
+        <form action="/changer_mot_de_passe" method="post">
+            <label for="nouveau_mdp">Nouveau mot de passe :</label>
             <input type="password" id="nouveau_mdp" name="nouveau_mdp" class="coco" required><br>
-            <button type="submit" class="coco">Mettre à jour le mot de passe</button>
+            <button type="submit" class="coco">Changer le mot de passe</button>
         </form>
     </div>
 {% endblock %}
