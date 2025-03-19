@@ -1,7 +1,6 @@
 import csv
 import os
 from flask import Flask, request, render_template, redirect, session, url_for
-from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = "MaSuperCleSecrete"
@@ -45,7 +44,7 @@ def choisir_avatar():
 
             # Ajouter le chemin de l'avatar à la session
             session['avatar'] = avatar_path
-            return redirect(url_for('profil'))  # Rediriger vers le profil après téléchargement de l'avatar
+            return redirect(url_for('profil'))
 
     return render_template('choisir_avatar.html')
 
@@ -55,7 +54,13 @@ def profil():
     if 'login' not in session:
         return redirect(url_for('login'))
 
+    # Charger l'avatar depuis le fichier
     avatar_path = session.get('avatar', None)
+    if not avatar_path:
+        avatar_path = os.path.join(AVATAR_FOLDER, f"{session['login']}.jpg")
+        if os.path.exists(avatar_path):
+            session['avatar'] = avatar_path  # Sauvegarder le chemin de l'avatar dans la session
+
     return render_template('profil.html', avatar_path=avatar_path, login=session['login'])
 
 @app.route('/', methods=['GET', 'POST'])
@@ -72,11 +77,16 @@ def login():
         if login in utilisateurs and utilisateurs[login] == password:
             session['login'] = login
 
+            # Vérifier si un avatar existe déjà et le charger
+            avatar_path = os.path.join(AVATAR_FOLDER, f"{login}.jpg")
+            if os.path.exists(avatar_path):
+                session['avatar'] = avatar_path
+
             # Si l'utilisateur a encore le mot de passe par défaut, on lui demande de le changer
             if utilisateurs[login] == "azerty*123":
                 return redirect(url_for('changer_mot_de_passe'))
             else:
-                return redirect(url_for('profil'))  # Rediriger vers le profil après connexion
+                return redirect(url_for('profil'))
 
         else:
             return "Identifiants incorrects", 401
@@ -98,7 +108,7 @@ def changer_mot_de_passe():
         # Sauvegarder les modifications dans le fichier CSV
         sauvegarder_utilisateurs(utilisateurs)
 
-        return redirect(url_for('choisir_avatar'))  # Rediriger vers la page de choix d'avatar après le changement de mot de passe
+        return redirect(url_for('choisir_avatar'))
 
     return render_template('changer_mot_de_passe.html')
 
@@ -107,7 +117,7 @@ def logout():
     # Supprimer les données de la session pour déconnecter l'utilisateur
     session.pop('login', None)
     session.pop('avatar', None)  # Supprimer l'avatar si nécessaire
-    return redirect(url_for('login'))  # Rediriger vers la page de connexion
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True)
