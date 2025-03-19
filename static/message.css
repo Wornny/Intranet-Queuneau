@@ -1,0 +1,13 @@
+/* Centrer le contenu de la page */
+.thank-you-container {
+    display: flex;
+    justify-content: center;  /* Centre horizontalement */
+    align-items: center;      /* Centre verticalement */
+    height: 100vh;            /* Utilise la hauteur complète de la fenêtre */
+    text-align: center;       /* Centre le texte à l'intérieur de l'élément */
+}
+
+.thank-you-container h1 {
+    font-size: 2rem;
+    color: #fff;  /* Vous pouvez personnaliser la couleur ici */
+}

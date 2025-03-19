@@ -9,6 +9,11 @@ def bonjour_post():
 
     return render_template('index.html',)
 
+@app.route('/save', methods=['POST'])
+def save_message():
+
+    return render_template('message.html',)
+
 
 if __name__ == '__main__':
     app.run(host ="0.0.0.0" , port=8000 , debug=True)

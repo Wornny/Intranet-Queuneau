@@ -41,7 +41,7 @@ nav a {
     text-decoration: none;
     color: #fff; /* Couleur des liens */
     margin: 0 15px; /* Espacement entre les liens */
-    font-size: 1.2rem;
+    font-size: 1.2rem; /* Agrandir légèrement la taille des liens */
     text-transform: uppercase;
     letter-spacing: 1px;
     display: inline-block; /* Assure que les liens sont en ligne */
@@ -58,13 +58,13 @@ nav a:hover {
 
 /* Sections du contenu */
 .page-section {
-    padding: 60px 0;
+    padding: 80px 0; /* Augmenter l'espace autour des sections */
     margin-top: 80px; /* Décalage vers le bas pour ne pas que la nav se superpose */
 }
 
 /* Section des en-têtes */
 .section-heading {
-    font-size: 2.5rem;
+    font-size: 3rem; /* Agrandir la taille du titre */
     letter-spacing: 3px;
     color: #00FFAB; /* Vert néon */
     text-transform: uppercase;
@@ -152,12 +152,13 @@ form {
     text-align: center;
     margin-top: 100px;
 }
+
 /* Navbar Toggle (Menu Button) */
 .navbar-toggler {
     font-size: 20px; /* Augmenter la taille du texte */
     color: #fff;
     background-color: #f50000; /* Couleur de fond */
-    border: 2px solid #3498db; /* Nouvelle couleur de bordure bleue claire */
+    border: 2px solid #ffffff; /* Nouvelle couleur de bordure bleue claire */
     padding: 10px 20px;
     border-radius: 5px; /* Angles arrondis */
     text-transform: uppercase; /* Met le texte en majuscule */
@@ -170,4 +171,41 @@ form {
     background-color: #00FFAB; /* Couleur plus sombre au survol */
     border-color: #00FFAB; /* Couleur de bordure plus sombre au survol */
     transform: scale(1.05); /* Légère animation d'agrandissement */
+}
+
+/* Section 'A propos' */
+#apropos .section-heading {
+    font-size: 3.5rem; /* Agrandir la taille du titre A propos */
+    letter-spacing: 2px; /* Espacement entre les lettres */
+    color: #fff; /* Blanc pour un meilleur contraste */
+}
+
+/* Text 'A propos' */
+#apropos p {
+    font-size: 1.8rem; /* Agrandir le texte */
+    line-height: 1.6; /* Améliorer l'espacement des lignes */
+    color: #ddd; /* Couleur claire pour un meilleur contraste */
+    max-width: 800px; /* Limiter la largeur du texte */
+    margin: 20px auto; /* Centrer le texte */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    border-radius: 10px;
+}
+/* Section 'Contactez nous' */
+#contact .section-heading {
+    font-size: 3.5rem; /* Agrandir la taille du titre 'Contactez nous' */
+    letter-spacing: 2px; /* Espacement entre les lettres */
+    color: #fff; /* Blanc pour un meilleur contraste */
+}
+
+/* Text 'Contactez nous' */
+#contact h3.section-subheading {
+    font-size: 1.8rem; /* Agrandir la taille du texte sous le titre */
+    line-height: 1.6; /* Améliorer l'espacement des lignes */
+    color: #ddd; /* Couleur claire pour un meilleur contraste */
+    max-width: 800px; /* Limiter la largeur du texte */
+    margin: 20px auto; /* Centrer le texte */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    border-radius: 10px;
 }
