@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-   
     <link rel="stylesheet" href="/static/css/remplacement.css">
     <title>Remplacement</title>
 </head>
@@ -10,15 +9,18 @@
 
     <header>
         <h1>Remplacement</h1>
-        
     </header>
 
     <main>
         <form action="/remplacement" method="POST">
-            <input id="Créneau" type="text" name="Créneau" placeholder="Créneau" required>
-            <input id="classe" type="text" name="classe" placeholder="Classe" required>
-            <input id="Matière" type="text" name="Matière" placeholder="Matière" required>
+           
+            <div class="form-row">
+                <input id="Créneau" type="text" name="Créneau" placeholder="Créneau" required>
+                <input id="classe" type="text" name="classe" placeholder="Classe" required>
+                <input id="Matière" type="text" name="Matière" placeholder="Matière" required>
+            </div>
             
+          
             <input id="bouton" type="submit" value="Soumettre">
         </form>
     </main>
