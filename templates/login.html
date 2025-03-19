@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
-    <link rel="stylesheet" href="/static/css/styles.css"> <!-- Assurez-vous que le chemin vers le fichier CSS est correct -->
-</head>
-<body class="corentin">
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
     <div class="container pcpei">
         <h1 class="coco">Se Connecter</h1>
         <form action="/login" method="post">
@@ -17,5 +13,4 @@
             <button type="submit" class="coco">Se Connecter</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}
