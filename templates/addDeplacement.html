@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<main>
+    <section>
+        <form id="contactForm" action="/save" method="POST" class="container">
+            <div class="row mb-3-Deplacement">
+                <div class="col-md-6-Deplacement">
+                    <input class="form-control-Deplacement" id="Adresse" name="address" type="text" placeholder="Adresse" required>
+                    <div class="invalid-feedback">L'adresse est obligatoire.</div>
+                </div>
+                <div class="col-md-6-Deplacement">
+                    <input class="form-control-Deplacement" id="Adresse_2" name="address_2" type="text" placeholder="Adresse 2 (Facultatif)">
+                </div>
+            </div>
+
+            <div class="row mb-3-Deplacement">
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="Code_postal" name="postal_code" type="text" placeholder="Code postal" required>
+                    <div class="invalid-feedback">Le code postal est obligatoire.</div>
+                </div>
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="Ville_départ" name="start_city" type="text" placeholder="Ville" required>
+                    <div class="invalid-feedback">La ville de départ est obligatoire.</div>
+                </div>
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="P_fiscale_voiture" name="car" type="text" placeholder="Puissance fiscale voiture" required>
+                    <div class="invalid-feedback">Ce champ doit être complété.</div>
+                </div>
+            </div>
+
+            <div class="row mb-3-Deplacement">
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="Objet" name="objet" type="text" placeholder="Objet du déplacement" required>
+                    <div class="invalid-feedback">Saisissez un objet de déplacement.</div>
+                </div>
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="Ville_d'arrivée" name="end_city" type="text" placeholder="Ville d'arrivée" required>
+                    <div class="invalid-feedback">La ville d'arrivée est obligatoire.</div>
+                </div>
+                <div class="col-md-4-Deplacement">
+                    <input class="form-control-Deplacement" id="Entreprise" name="bussiness" type="text" placeholder="Entreprise" required>
+                    <div class="invalid-feedback">Saisissez une entreprise.</div>
+                </div>
+            </div>
+
+            <div class="row mb-3-Deplacement">
+                <div class="col-md-3-Deplacement">
+                    <input class="form-control-Deplacement" id="Date" name="date" type="text" placeholder="Date" required>
+                    <div class="invalid-feedback">Saisissez une date.</div>
+                </div>
+                <div class="col-md-3-Deplacement">
+                    <input class="form-control-Deplacement" id="heure_départ_allée" name="start_hours_go" type="text" placeholder="Heure de départ" required>
+                </div>
+                <div class="col-md-3-Deplacement">
+                    <input class="form-control-Deplacement" id="heure_d'arrivée_allée" name="end_hours_go" type="text" placeholder="Heure d'arrivée" required>
+                </div>
+                <div class="col-md-3-Deplacement">
+                    <input class="form-control-Deplacement" id="heure_départ_retour" name="start_hours_back" type="text" placeholder="Heure de départ" required>
+                </div>
+                <div class="col-md-3-Deplacement">
+                    <input class="form-control-Deplacement" id="heure_d'arrivée_retour" name="end_hours_back" type="text" placeholder="Heure d'arrivée" required>
+                </div>
+            </div>
+
+            <div class="text-center-Deplacement">
+                <button class="btn btn-primary btn-xl text-uppercase" type="submit">Soumettre</button>
+            </div>
+        </form>
+    </section>
+</main>
+{% endblock %}
