@@ -1,0 +1,217 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Slab', serif;
+    background-color: #f9f9f9;
+    color: #000000;
+    line-height: 1.6;
+}
+
+/* Navbar Styles */
+#mainNav {
+  background-color: #000000; /* Fond sombre */
+  padding: 15px 0;
+  transition: background-color 0.3s ease;
+}
+
+#mainNav .navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#mainNav .navbar-nav .nav-item {
+  margin-right: 20px; /* Espacement entre les éléments */
+}
+
+#mainNav .navbar-nav .nav-item:last-child {
+  margin-right: 0; /* Retirer la marge à droite du dernier item */
+}
+
+#mainNav .navbar-nav .nav-link {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px 20px;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+#mainNav .navbar-nav .nav-link:hover {
+  color: #3498db; /* Light blue */
+  background-color: transparent;
+  border-bottom: 2px solid #3498db;
+}
+
+/* Navbar Toggle (Menu Button) */
+.navbar-toggler {
+  font-size: 20px; /* Augmenter la taille du texte */
+  color: #fff;
+  background-color: #e000f5; /* Couleur de fond */
+  border: 2px solid #000000; /* Bordure autour du bouton */
+  padding: 10px 20px;
+  border-radius: 5px; /* Angles arrondis */
+  text-transform: uppercase; /* Met le texte en majuscule */
+  font-weight: bold; /* Rendre le texte plus visible */
+  transition: all 0.3s ease;
+}
+
+/* Changer la couleur du bouton au survol */
+.navbar-toggler:hover {
+  background-color: #1d66b1; /* Couleur plus sombre au survol */
+  border-color: #1d66b1; /* Couleur de bordure plus sombre */
+  transform: scale(1.05); /* Légère animation d'agrandissement */
+}
+
+/* Navbar Toggle Icon */
+.navbar-toggler-icon {
+  color: #fff;
+}
+
+/* Ensuring menu items are aligned on mobile */
+@media screen and (max-width: 768px) {
+  #mainNav .navbar-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 20px 0;
+  }
+
+  #mainNav .navbar-nav .nav-item {
+      margin-right: 0;
+      width: 100%;
+      text-align: left; /* Align items to the left on mobile */
+  }
+
+  #mainNav .navbar-nav .nav-link {
+      padding: 10px 20px;
+      width: 100%;
+  }
+
+  /* Menu button style on mobile */
+  .navbar-toggler {
+      font-size: 24px; /* Taille plus grande pour le texte du bouton "Menu" sur mobile */
+      padding: 12px 25px;
+      text-align: center;
+  }
+}
+
+/* Masthead */
+.masthead {
+    background: linear-gradient(to bottom right, #1f1c2c, #928DAB); /* Subtle gradient */
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid #fff;
+}
+
+.masthead-subheading {
+    font-size: 30px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+.masthead-heading {
+    font-size: 55px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.masthead-heading.text-uppercase {
+    font-size: 60px;
+    font-weight: 800;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+/* Footer */
+.footer {
+    background-color: #2d3436;
+    color: #fff;
+    padding: 50px 0;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.footer .btn-social {
+    background-color: #3498db;
+    border-radius: 50%;
+    padding: 12px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.footer .btn-social:hover {
+    background-color: #1d66b1;
+}
+
+.footer .link-dark {
+    color: #fff;
+    font-size: 14px;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.footer .link-dark:hover {
+    color: #3498db;
+}
+
+.footer .col-lg-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Content Area */
+.content {
+    padding: 60px 20px;
+}
+
+/* Hover Effects */
+.nav-link,
+.btn-social {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-3px);
+}
+
+.btn-social:hover {
+    transform: scale(1.1);
+    background-color: #1d66b1;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .masthead {
+        padding: 80px 0;
+    }
+
+    .masthead-subheading {
+        font-size: 22px;
+    }
+
+    .masthead-heading {
+        font-size: 40px;
+    }
+
+    #mainNav .navbar-nav .nav-link {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+}

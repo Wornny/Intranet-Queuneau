@@ -2,6 +2,13 @@ from flask import Flask, render_template, request, redirect
 import csv
 
 app = Flask(__name__)
+app.secret_key = "MaSuperCleSecrete"  
+
+
+@app.route('/', methods=['GET', 'POST'])
+def bonjour_post():
+
+    return "render_template('index.html',)"
 
 @app.route('/remplacement')
 def index():
@@ -37,4 +44,4 @@ def ajouter_remplacement():
     return redirect('/remplacement')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host ="0.0.0.0" , port=8000 , debug=True)
