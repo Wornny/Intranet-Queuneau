@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import csv
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/remplacement')
 def index():
     return render_template('remplacement.html')
 
@@ -34,7 +34,7 @@ def ajouter_remplacement():
         writer = csv.writer(f, delimiter=';')
         writer.writerow([jour, horaire, matiere, classe, status])  # Enregistrement dans le CSV
 
-    return render_template('remplacement.html')
+    return redirect('/remplacement')
 
 if __name__ == '__main__':
     app.run(debug=True)
