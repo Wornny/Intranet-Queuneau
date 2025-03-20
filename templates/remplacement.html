@@ -129,8 +129,9 @@
         </tbody>
     </table>
 
-    <h3>Proposer un Remplacement</h3>
     
+    {% if type_user == "Gestionnaire" %}
+    <h3>Proposer un Remplacement</h3>
     <form action="{{ url_for('ajouter_remplacement') }}" method="POST">
         <label>Jour: 
             <select name="jour">
@@ -161,4 +162,5 @@
         <label>Status: <input type="text" name="status" required></label>
         <button type="submit">Soumettre</button>
     </form>
+    {% endif %}
 {% endblock %}

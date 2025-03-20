@@ -124,7 +124,10 @@ def logout():
 
 @app.route('/remplacement')
 def index():
-    return render_template('remplacement.html')
+
+    type_user = 'Gestionnaire'     #Gestionnaire  Personnel 
+
+    return render_template('remplacement.html', type_user=type_user)
 
 @app.route('/ajouter_remplacement', methods=['POST'])
 def ajouter_remplacement():
