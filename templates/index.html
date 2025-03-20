@@ -47,7 +47,14 @@
                             </div>
                         </div>
                     </div>
-                                        <!-- Submit Button-->
+                                        <!-- Champ question caché pour que l'utilisateur réponde -->
+                    <div class="form-group">
+                        <input class="form-control" id="question" name="question" type="text" placeholder="{{ question }}" required>
+                        <div class="invalid-feedback" data-sb-feedback="question:required">La réponse à la question est obligatoire.</div>
+                    </div>
+                    <!-- Champ caché pour la réponse correcte -->
+                    <input type="hidden" id="correct_answer" name="correct_answer" value="{{ reponse }}">
+                                 <!-- Submit Button-->
                     <div class="text-center">
                         <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Envoyer message</button>
                     </div>

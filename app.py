@@ -1,4 +1,5 @@
 import csv
+import random
 import os
 from flask import Flask, request, render_template, redirect, session, url_for
 
@@ -34,6 +35,17 @@ def sauvegarder_utilisateurs(utilisateurs):
         for login, data in utilisateurs.items():
             writer.writerow([login, data["password"], data["email"]])
 
+# fonction pour générer une question aléatoire
+def generate_question():
+    questions = [
+        {"question": "Le zèbre est noir et ?", "reponse": "blanc"},
+        {"question": "Combien font 17 x 35 ?", "reponse": "595"},
+        {"question": "Quelle est la dérivé de 6x + 2 ?", "reponse": "6"},
+        {"question": "Qui a gagné la dernière ligue des champions ?", "reponse": "real madrid"},
+        {"question": "De quelle couleur est une orange ?", "reponse": "orange"}
+    ]
+    return random.choice(questions)           
+
 # Gérer le téléchargement de l'avatar
 @app.route('/choisir_avatar', methods=['GET', 'POST'])
 def choisir_avatar():
@@ -66,7 +78,8 @@ def profil():
 
 @app.route('/', methods=['GET', 'POST'])
 def bonjour_post():
-    return render_template('index.html')
+    q = generate_question()
+    return render_template('index.html', question=q["question"], reponse=q["reponse"])
 
 @app.route('/message', methods=['POST'])
 def message():  
