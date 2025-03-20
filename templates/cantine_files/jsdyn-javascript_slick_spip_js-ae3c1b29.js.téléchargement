@@ -1,0 +1,7 @@
+/* #PRODUIRE{fond=javascript/slick.spip.js}
+   md5:4860b76e76a01f6743339b1cdbd92685 */
+$(function () {
+    $("#slick").slick(
+        {"slide":"div","slidesToShow":8,"slidesToScroll":1,"autoplay":true,"autoplaySpeed":3000,"fade":false,"speed":300,"vertical":false,"lazyload":"ondemand","centerMode":false,"cssEase":"ease","dots":false,"pauseOnHover":true,"pauseOnDotsHover":false,"rtl":false,"adaptiveHeight":false,"arrows":false}
+    );
+});

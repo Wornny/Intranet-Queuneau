@@ -1,0 +1,302 @@
+/*
+#@/var/www/spip/plugins/developpement/bootstrap2/bootstrap2spip/css/spip.list.less
+#@/var/www/spip/plugins/interface-publique/spipr-educ/css/variables.less
+#@/var/www/spip/plugins/developpement/bootstrap2/bootstrap2spip/css/spip.variables.less
+#@/var/www/spip/plugins/developpement/bootstrap2/bootstrap/css/mixins.less
+*/
+/* ------------------------------------------
+/* Sous-navigation et autres menus
+/* ------------------------------------------ */
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 34px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* Listes d'items */
+/*
+.liste[.long][.short][.thumb]
+  .liste-items
+    .item[.long][.short][.thumb]
+
+
+Un item est compose de :
+
+.entry
+  .entry-title
+    .spip_logos
+    .read-more
+  .publication
+    .pubdate
+    .authors
+  .entry-content
+  .postmeta
+    .comments
+    .signatures
+*/
+.liste {
+  margin-bottom: 1.5em;
+}
+.liste.long {
+  margin-bottom: 3em;
+}
+.liste-items {
+  margin-left: 0;
+  list-style: none;
+  border-top: 0;
+}
+.liste-items .item {
+  padding: 0.75em 0;
+  clear: both;
+  overflow: hidden;
+  border-top: 1px solid #f9f9fa;
+  margin-top: -1px;
+}
+.liste-items .item:last-child {
+  border-bottom: 1px solid #f9f9fa;
+}
+.liste-items .item .entry {
+  margin-bottom: 0;
+}
+.liste-items .item .entry-title:first-child {
+  margin-top: 0;
+}
+.entry div.spip,
+.entry p,
+.entry .p {
+  margin-bottom: 0.75em;
+}
+.entry .entry-title {
+  margin-bottom: 12px;
+}
+.entry .entry-content > :last-child {
+  margin-bottom: 0;
+}
+.entry .entry-content {
+  margin-bottom: 0.75em;
+}
+.liste-items .item-header {
+  padding: 0.75em 0;
+  clear: both;
+  overflow: hidden;
+  border-top: 1px solid #f9f9fa;
+  margin-top: -1px;
+  border: 0;
+  display: block;
+  font-weight: bold;
+  color: #999999;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+.item + .item-header {
+  padding-top: 0.75em;
+}
+.liste-items .publication,
+.liste-items .postmeta {
+  display: none;
+}
+.liste-items .postmeta .tags ul,
+.liste-items .postmeta .tags li {
+  display: inline;
+}
+/* Long */
+.long .publication {
+  display: block;
+}
+.long .postmeta {
+  display: block;
+}
+/* Short */
+.short .item,
+.item.short {
+  padding: 0.375em 0;
+}
+.short .item:first-child:last-child,
+.item.short:first-child:last-child {
+  border: 0;
+}
+.short .entry-title {
+  font-size: inherit;
+  line-height: inherit;
+  display: inline;
+}
+.short .publication,
+.short .spip_logos,
+.short .spip_logo,
+.short .entry-content,
+.short .postmeta,
+.short .read-more {
+  display: none;
+}
+.short .entry > :not(.entry-title) {
+  display: none;
+}
+.short .entry,
+.short .entry-title {
+  display: inline;
+}
+/* thumb */
+.thumb .item:first-child:last-child,
+.item.thumb:first-child:last-child {
+  border: 0;
+}
+.thumb .entry-title {
+  padding-top: 144px;
+  display: block;
+}
+.thumb .spip_logos,
+.thumb .spip_logo {
+  display: block;
+  float: left;
+  margin: 0;
+  margin-top: -144px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 120px;
+  width: 100% !important;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+}
+.thumb .spip_logos img,
+.thumb .spip_logo img {
+  height: 100% !important;
+  width: 100%;
+}
+.thumb .entry-content {
+  max-height: 7.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+/* on demand */
+.with-read-more .entry {
+  position: relative;
+  padding-bottom: 1.5em;
+}
+.with-read-more .postmeta {
+  min-height: 1.5em;
+  padding: 0.75em 0;
+  padding-left: 2em;
+  padding-bottom: 0;
+  margin-bottom: -1.5em;
+}
+.with-read-more .read-more {
+  display: block;
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  text-align: right;
+  padding: 0.75em 0;
+  padding-left: 0;
+  padding-bottom: 0;
+  line-height: 1.5em;
+  font-size: 1em;
+}
+.with-publication .entry .publication {
+  display: block;
+}
+.with-publication-inline .entry .publication {
+  display: inline;
+  padding-left: 0.25em;
+}
+.with-postmeta .entry .postmeta {
+  display: block;
+}
+.with-postmeta-inline .entry .postmeta {
+  display: inline;
+  padding-left: 0.25em;
+}
+.with-content .entry .entry-content {
+  display: block;
+}
+.with-content-inline .entry .entry-content {
+  display: inline;
+}
+/* dans un .secondary */
+.secondary .liste-items .item {
+  padding: 0.375em 0;
+}
+.secondary .liste-items .spip_logos,
+.secondary .liste-items .spip_logo {
+  max-width: 3.75em;
+}
+.secondary .liste-items .spip_logos img,
+.secondary .liste-items .spip_logo img {
+  height: auto !important;
+}
+.secondary .liste-items .entry-content {
+  max-height: 7.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+.secondary .short .item,
+.secondary .item.short {
+  padding: 0.1875em 0;
+}
+.secondary .short .entry-title {
+  font-weight: normal;
+}
+.secondary .long .entry-content {
+  max-height: 15em;
+}
+/* liste de documents */
+.documents .item {
+  padding-right: 0;
+  padding-left: 4.5em;
+}
+.entry.document {
+  padding-bottom: 0;
+}
+.entry.document .entry-title {
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: 0;
+}
+.entry.document .spip_logos,
+.entry.document .spip_logo {
+  float: left;
+  max-width: 2.25em;
+  margin: 2px 10px;
+  margin-left: -4.5em;
+  margin-top: 0;
+}
+.entry.document .publication {
+  display: block;
+  margin-bottom: 0;
+}
+.entry.document .read-more {
+  display: none;
+}
+.documents.short .item,
+.documents .item.short {
+  padding-left: 0;
+}
+.short .document .spip_logos,
+.short .document .spip_logo {
+  display: none;
+}
