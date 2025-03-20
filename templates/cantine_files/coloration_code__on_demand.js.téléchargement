@@ -1,0 +1,238 @@
+(() => {
+  const aliases = {
+    'as': 'actionscript',
+    'as': 'angelscript',
+    'apacheconf': 'apache',
+    'osascript': 'applescript',
+    'ino': 'arduino',
+    'arm': 'armasm',
+    'adoc': 'asciidoc',
+    'mawk': 'awk',
+    'nawk': 'awk',
+    'gawk': 'awk',
+    'x++': 'axapta',
+    'sh': 'bash',
+    'bf': 'brainfuck',
+    'capnp': 'capnproto',
+    'xml': 'xml',
+    'html': 'xml',
+    'xhtml': 'xml',
+    'rss': 'xml',
+    'atom': 'xml',
+    'xjb': 'xml',
+    'xsd': 'xml',
+    'xsl': 'xml',
+    'plist': 'xml',
+    'svg': 'xml',
+    'clj': 'clojure',
+    'cmake.in': 'cmake',
+    'h': 'c',
+    'coffee': 'coffeescript',
+    'cson': 'coffeescript',
+    'iced': 'coffeescript',
+    'cls': 'cos',
+    'hpp': 'cpp',
+    'cc': 'cpp',
+    'hh': 'cpp',
+    'c++': 'cpp',
+    'h++': 'cpp',
+    'cxx': 'cpp',
+    'hxx': 'cpp',
+    'crm': 'crmsh',
+    'pcmk': 'crmsh',
+    'cr': 'crystal',
+    'cs': 'csharp',
+    'dpr': 'delphi',
+    'dfm': 'delphi',
+    'pas': 'delphi',
+    'pascal': 'delphi',
+    'patch': 'diff',
+    'jinja': 'django',
+    'zone': 'dns',
+    'bind': 'dns',
+    'docker': 'dockerfile',
+    'bat': 'dos',
+    'cmd': 'dos',
+    'dst': 'dust',
+    'erl': 'erlang',
+    'xls': 'excel',
+    'xlsx': 'excel',
+    'f90': 'fortran',
+    'f95': 'fortran',
+    'fs': 'fsharp',
+    'gms': 'gams',
+    'gss': 'gauss',
+    'nc': 'gcode',
+    'gololang': 'golo',
+    'golang': 'go',
+    'hbs': 'handlebars',
+    'html.hbs': 'handlebars',
+    'html.handlebars': 'handlebars',
+    'hs': 'haskell',
+    'hx': 'haxe',
+    'https': 'http',
+    'hylang': 'hy',
+    'i7': 'inform7',
+    'toml': 'ini',
+    'jsp': 'java',
+    'js': 'javascript',
+    'jsx': 'javascript',
+    'kt': 'kotlin',
+    'lassoscript': 'lasso',
+    'tex': 'latex',
+    'ls': 'livescript',
+    'mk': 'makefile',
+    'mak': 'makefile',
+    'make': 'makefile',
+    'md': 'markdown',
+    'mkdown': 'markdown',
+    'mkd': 'markdown',
+    'mma': 'mathematica',
+    'wl': 'mathematica',
+    'moon': 'moonscript',
+    'nginxconf': 'nginx',
+    'nimrod': 'nim',
+    'mm': 'objectivec',
+    'objc': 'objectivec',
+    'obj-c': 'objectivec',
+    'obj-c++': 'objectivec',
+    'objective-c++': 'objectivec',
+    'ml': 'ocaml',
+    'scad': 'openscad',
+    'pl': 'perl',
+    'pm': 'perl',
+    'pf.conf': 'pf',
+    'postgres': 'pgsql',
+    'postgresql': 'pgsql',
+    'txt': 'plaintext',
+    'text': 'plaintext',
+    'ps': 'powershell',
+    'ps1': 'powershell',
+    'pp': 'puppet',
+    'py': 'python',
+    'gyp': 'python',
+    're': 'reasonml',
+    'graph': 'roboconf',
+    'instances': 'roboconf',
+    'rb': 'ruby',
+    'gemspec': 'ruby',
+    'podspec': 'ruby',
+    'thor': 'ruby',
+    'irb': 'ruby',
+    'rs': 'rust',
+    'sci': 'scilab',
+    'console': 'shell',
+    'st': 'smalltalk',
+    'ml': 'sml',
+    'stanfuncs': 'stan',
+    'styl': 'stylus',
+    'tk': 'tcl',
+    'craftcms': 'twig',
+    'ts': 'typescript',
+    'tsx': 'typescript',
+    'vb': 'vbnet',
+    'vbs': 'vbscript',
+    'v': 'verilog',
+    'tao': 'xl',
+    'xpath': 'xquery',
+    'xq': 'xquery',
+    'yml': 'yaml',
+    'zep': 'zephir',
+  }
+
+  const findNeededHljsLanguages = () => {
+    let languagesToLoad = ['plaintext'];
+    document.querySelectorAll('pre[data-language]').forEach((e) => {
+      const language = aliases[e.dataset.language] || e.dataset.language;
+      if (!languagesToLoad.includes(language)) {
+        languagesToLoad.push(language);
+      }
+    });
+    return languagesToLoad;
+  }
+
+  const loadScriptHljsLanguage = (language) => {
+    return loadScript(spipConfig.coloration_code.assets + '/highlightjs/languages/' + language + '.min.js');
+  }
+
+  // https://abdessalam.dev/blog/loading-script-asynchronously-as-a-promise-in-javascript/
+  const loadScript = (src, async = true, type = "text/javascript") => {
+    return new Promise((resolve, reject) => {
+      try {
+        const container = document.head || document.body;
+        const scripts = Array.from(container.querySelectorAll('script[src]'));
+        const existingScript = scripts.find((script) => {
+          return script.attributes.src.value === src;
+        });
+        const tag = existingScript || document.createElement("script");
+        const message = { loaded: true, error: false, message: '' };
+        if (!existingScript) {
+          tag.type = type;
+          tag.async = async;
+          tag.src = src;
+
+          tag.addEventListener("load", () => {
+            tag.dataset.message = JSON.stringify(message);
+            resolve(message);
+          });
+
+          tag.addEventListener("error", () => {
+            message.error = true;
+            message.message = `Failed to load script with src ${src}`;
+            tag.dataset.message = JSON.stringify(message);
+            reject(message);
+          });
+
+          container.appendChild(tag);
+        } else if (tag.dataset.message !== undefined) {
+          const msg = JSON.parse(tag.dataset.message);
+          msg.error ? reject(msg) : resolve(msg);
+        }
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  const init = () => {
+    const languages_promises = [];
+    findNeededHljsLanguages().forEach(language => {
+      languages_promises.push(loadScriptHljsLanguage(language)
+        .then((e) => [language, e])
+        .catch((e) => [language, e])
+      );
+    });
+
+    Promise.all(languages_promises).then((results) => {
+      results.forEach((result) => {
+        if (result[1].error) {
+          const language = result[0];
+          // éviter que hljs.highlightAll() ne râle en ne trouvant pas un langage inexistant
+          document.querySelectorAll('pre[data-language="' + language + '"]').forEach((e) => {
+            e.classList.replace('language-' + language, 'language-plaintext');
+          });
+        }
+      });
+      onReady(startHljs);
+    });
+  }
+
+  const onReady = function (fn) {
+    if (document.readyState !== 'loading') {
+      fn();
+    } else {
+      document.addEventListener('DOMContentLoaded', fn);
+    }
+  }
+
+  const startHljs = function () {
+    const blocks = document.querySelectorAll('pre code:not(.hljs)');
+    blocks.forEach(e => e.parentElement.dataset.highlight = 'hljs');
+    blocks.forEach(hljs.highlightElement);
+  }
+
+  window.addEventListener('load', () => {
+    init();
+    onAjaxLoad(init);
+  });
+})();

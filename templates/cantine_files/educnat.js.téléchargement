@@ -1,0 +1,91 @@
+function placeEntete() {
+	var doc_reference_hauteur = document.getElementById("navbar-reduction");
+	var hauteur = $(doc_reference_hauteur).outerHeight(true);
+	var hauteur_complete = hauteur + 'px';
+	document.getElementById("suite-navbar-reduction").style.height = hauteur_complete;
+}
+
+function enteteLarge() {
+	var docReduc = document.getElementById("navbar-reduction");
+	$(docReduc).removeClass( "actif" );
+	var docEntete = document.getElementById("header_educnat");
+	$(docEntete).show();
+	var docVide = document.getElementById("suite-navbar-reduction");
+	$(docVide).hide();
+	var imgMariane = document.getElementById("icone_mariane_reduit");
+	$(imgMariane).hide();
+	var menuSecond = document.getElementsByClassName("dropdown-menu-second");
+	$(menuSecond).addClass("dropdown-menu-second-large");
+	$(menuSecond).removeClass("dropdown-menu-second-court");
+}
+
+function enteteCourte() {
+	var docReduc = document.getElementById("navbar-reduction");
+	$(docReduc).addClass( "actif" );
+	var docEntete = document.getElementById("header_educnat");
+	$(docEntete).hide();
+	var docVide = document.getElementById("suite-navbar-reduction");
+	$(docVide).show();
+	var imgMariane = document.getElementById("icone_mariane_reduit");
+	$(imgMariane).show();
+	var menuSecond = document.getElementsByClassName("dropdown-menu-second");
+	$(menuSecond).addClass("dropdown-menu-second-court");
+	$(menuSecond).removeClass("dropdown-menu-second-large");
+}
+
+function reactionScroll() {
+	var testLargeur = false;
+	var largeurEcran = $(window).width();
+	if (largeurEcran > 767) {testLargeur = true;}
+	var st = $(window).scrollTop(); 
+	if (testLargeur) {
+		if (st > lastScrollTop) {
+			placeEntete();
+			enteteCourte();
+		} else {
+			if (st == '0') {
+				enteteLarge()
+			}
+	   }
+	lastScrollTop = st <= 0 ? 0 : st;
+	}
+}
+
+var lastScrollTop = 0;
+$(window).on("scroll",function (){
+	reactionScroll();
+});
+
+$(window).resize(function(){
+    placeEntete();
+	var largeurEcran = $(window).width();
+	if (largeurEcran<=768) {
+		enteteLarge();
+	}
+	else {
+		var st = $(window).scrollTop();
+		if (st > 0) {
+			placeEntete();
+			enteteCourte();
+		}
+	}
+});
+
+window.onload = function (){
+	$("#article_contenu a[href*='#']:not([href='#'])").on('click', function() {
+		if (
+            location.hostname == this.hostname && this.pathname.replace(/^\//,"") == location.pathname.replace(/^\//,"")
+        ) {
+            var anchor = $(this.hash);
+            anchor = anchor.length ? anchor : $("[name=" + this.hash.slice(1) +"]");
+            if ( anchor.length ) {
+				var doc_reference_hauteur = document.getElementById("navbar-reduction");
+				var doc_padding = $(doc_reference_hauteur).outerHeight(true);
+				var position_anchor = anchor.offset();
+				var haut_anchor = Math.round(position_anchor.top);
+				$decalage = haut_anchor - doc_padding - 10;
+                $("html, body").animate( { scrollTop: $decalage }, 1200);
+            }
+        }
+	});
+};
