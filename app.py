@@ -7,28 +7,32 @@ app.secret_key = "MaSuperCleSecrete"
 CSV_FILE = "utilisateurs.csv"
 AVATAR_FOLDER = "static/avatars/"
 
-# Créer le dossier si nécessaire
+# Créer le dossier des avatars si nécessaire
 if not os.path.exists(AVATAR_FOLDER):
     os.makedirs(AVATAR_FOLDER)
 
 # Lecture du fichier CSV
 def lire_utilisateurs():
     utilisateurs = {}
-    with open(CSV_FILE, mode='r') as file:
+    with open(CSV_FILE, mode='r', newline='') as file:
         reader = csv.reader(file)
         next(reader)  # Ignorer l'en-tête
         for row in reader:
-            if len(row) == 2:
-                utilisateurs[row[0]] = row[1]
+            if len(row) == 2:  # Si l'email n'est pas encore présent, on a seulement login et password
+                login, password = row
+                utilisateurs[login] = {"password": password, "email": ""}
+            elif len(row) == 3:  # Si l'email est déjà dans le CSV
+                login, password, email = row
+                utilisateurs[login] = {"password": password, "email": email}
     return utilisateurs
 
-# Sauvegarder les utilisateurs après modification
+# Sauvegarde des utilisateurs dans le fichier CSV
 def sauvegarder_utilisateurs(utilisateurs):
     with open(CSV_FILE, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['login', 'password'])
-        for login, password in utilisateurs.items():
-            writer.writerow([login, password])
+        writer.writerow(['login', 'password', 'email'])
+        for login, data in utilisateurs.items():
+            writer.writerow([login, data["password"], data["email"]])
 
 # Gérer le téléchargement de l'avatar
 @app.route('/choisir_avatar', methods=['GET', 'POST'])
@@ -41,9 +45,7 @@ def choisir_avatar():
         if avatar:
             avatar_path = os.path.join(AVATAR_FOLDER, f"{session['login']}.jpg")
             avatar.save(avatar_path)
-
-            # Ajouter le chemin de l'avatar à la session
-            session['avatar'] = avatar_path
+            session['avatar'] = avatar_path  # Sauvegarde du chemin de l'avatar
             return redirect(url_for('profil'))
 
     return render_template('choisir_avatar.html')
@@ -54,12 +56,11 @@ def profil():
     if 'login' not in session:
         return redirect(url_for('login'))
 
-    # Charger l'avatar depuis le fichier
     avatar_path = session.get('avatar', None)
     if not avatar_path:
         avatar_path = os.path.join(AVATAR_FOLDER, f"{session['login']}.jpg")
         if os.path.exists(avatar_path):
-            session['avatar'] = avatar_path  # Sauvegarder le chemin de l'avatar dans la session
+            session['avatar'] = avatar_path  # Sauvegarde dans la session
 
     return render_template('profil.html', avatar_path=avatar_path, login=session['login'])
 
@@ -67,29 +68,41 @@ def profil():
 def bonjour_post():
     return render_template('index.html')
 
+# Connexion avec identifiant et mot de passe
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        login = request.form['login']
+        login_input = request.form['login']
         password = request.form['password']
+        email = request.form['email']  # Récupère l'email saisi
         utilisateurs = lire_utilisateurs()
 
-        if login in utilisateurs and utilisateurs[login] == password:
-            session['login'] = login
+        # Vérifier si l'identifiant existe et que le mot de passe correspond
+        for login, data in utilisateurs.items():
+            if login_input == login and data["password"] == password:
+                # Si l'email est vide pour cet utilisateur, ajouter l'email saisi
+                if not data["email"]:
+                    utilisateurs[login]["email"] = email
+                    sauvegarder_utilisateurs(utilisateurs)
 
-            # Vérifier si un avatar existe déjà et le charger
-            avatar_path = os.path.join(AVATAR_FOLDER, f"{login}.jpg")
-            if os.path.exists(avatar_path):
-                session['avatar'] = avatar_path
+                # Vérifier si l'email saisi correspond à celui stocké dans le CSV
+                if data["email"] == email:
+                    session['login'] = login
 
-            # Si l'utilisateur a encore le mot de passe par défaut, on lui demande de le changer
-            if utilisateurs[login] == "azerty*123":
-                return redirect(url_for('changer_mot_de_passe'))
-            else:
-                return redirect(url_for('profil'))
+                    # Vérifier si un avatar existe déjà et le charger
+                    avatar_path = os.path.join(AVATAR_FOLDER, f"{login}.jpg")
+                    if os.path.exists(avatar_path):
+                        session['avatar'] = avatar_path
 
-        else:
-            return "Identifiants incorrects", 401
+                    # Rediriger vers le profil si le mot de passe n'est pas encore par défaut
+                    if data["password"] == "azerty*123":
+                        return redirect(url_for('changer_mot_de_passe'))
+                    else:
+                        return redirect(url_for('profil'))
+                else:
+                    return "Email incorrect", 401
+
+        return "Identifiants incorrects", 401
 
     return render_template('login.html')
 
@@ -103,7 +116,7 @@ def changer_mot_de_passe():
         login = session['login']
         
         utilisateurs = lire_utilisateurs()
-        utilisateurs[login] = nouveau_mdp  # Mettre à jour le mot de passe de l'utilisateur
+        utilisateurs[login]["password"] = nouveau_mdp  # Mettre à jour le mot de passe
         
         # Sauvegarder les modifications dans le fichier CSV
         sauvegarder_utilisateurs(utilisateurs)
@@ -114,13 +127,9 @@ def changer_mot_de_passe():
 
 @app.route('/logout')
 def logout():
-    # Supprimer les données de la session pour déconnecter l'utilisateur
     session.pop('login', None)
-    session.pop('avatar', None)  # Supprimer l'avatar si nécessaire
+    session.pop('avatar', None)  # Supprimer l'avatar de la session
     return redirect(url_for('login'))
-
-    return render_template('index.html',)
-
 
 @app.route('/remplacement')
 def index():
@@ -128,30 +137,27 @@ def index():
 
 @app.route('/ajouter_remplacement', methods=['POST'])
 def ajouter_remplacement():
-    jour = request.form['jour']  # Récupère le jour sélectionné
-    horaire = request.form['horaire']  # Récupère l'horaire sélectionné
-    matiere = request.form['matiere']  # Récupère la matière
-    classe = request.form['classe']  # Récupère la classe
-    status = request.form['status']  # Récupère le statut
+    jour = request.form['jour']
+    horaire = request.form['horaire']
+    matiere = request.form['matiere']
+    classe = request.form['classe']
+    status = request.form['status']
 
-    # Remplacer le numéro de l'horaire par le jour réel
-    if jour == 'lundi':
-        horaire = "Lundi"
-    elif jour == 'mardi':
-        horaire = "Mardi"
-    elif jour == 'mercredi':
-        horaire = "Mercredi"
-    elif jour == 'jeudi':
-        horaire = "Jeudi"
-    elif jour == 'vendredi':
-        horaire = "Vendredi"
-    elif jour == 'samedi':
-        horaire = "Samedi"
+    # Remplacement du numéro de l'horaire par le jour réel
+    jours_mapping = {
+        'lundi': "Lundi",
+        'mardi': "Mardi",
+        'mercredi': "Mercredi",
+        'jeudi': "Jeudi",
+        'vendredi': "Vendredi",
+        'samedi': "Samedi"
+    }
+    horaire = jours_mapping.get(jour, jour)
 
     # Ajout des données au fichier CSV
     with open('besoins.csv', 'a', newline='', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=';')
-        writer.writerow([jour, horaire, matiere, classe, status])  # Enregistrement dans le CSV
+        writer.writerow([jour, horaire, matiere, classe, status])
 
     return redirect('/remplacement')
 
