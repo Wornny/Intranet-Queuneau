@@ -59,7 +59,7 @@ def profil():
     if not avatar_path:
         avatar_path = os.path.join(AVATAR_FOLDER, f"{session['login']}.jpg")
         if os.path.exists(avatar_path):
-            session['avatar'] = avatar_path  # Sauvegarder le chemin de l'avatar dans la session
+            session['avatar'] = avatar_path  # Sauvegarder le chemin de l'avatar dans la sessions
 
     return render_template('profil.html', avatar_path=avatar_path, login=session['login'])
 
