@@ -68,6 +68,11 @@ def profil():
 def bonjour_post():
     return render_template('index.html')
 
+@app.route('/save', methods=['POST'])
+def save_message():  
+
+    return f"Merci pour votre soumission !"  # message de remerciement
+
 # Connexion avec identifiant et mot de passe
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -133,11 +138,29 @@ def logout():
 
 @app.route('/remplacement')
 def index():
+    type_user = 'Gestionnaire'  # Exemple, peut être dynamique
 
-    type_user = 'Gestionnaire'     #Gestionnaire  Personnel 
+    # Lire le fichier CSV
+    remplacements = []
+    try:
+        with open('besoins.csv', 'r', newline='', encoding='utf-8') as f:
+            reader = csv.reader(f, delimiter=';')
+            next(reader)  # Ignore l'en-tête du CSV
+            for row in reader:
+                if len(row) == 6:  # Vérifier qu'il y a bien 6 colonnes
+                    date, jour, horaire, matiere, classe, status = row  # Prendre toutes les colonnes
+                    remplacements.append({
+                        'date': date,  # Ajout de la date (si besoin)
+                        'jour': jour,
+                        'horaire': horaire,
+                        'matiere': matiere,
+                        'classe': classe,
+                        'status': status
+                    })
+    except FileNotFoundError:
+        pass  # Si le fichier n'existe pas encore, on ne fait rien
 
-    return render_template('remplacement.html', type_user=type_user)
-
+    return render_template('remplacement.html', type_user=type_user, remplacements=remplacements)
 @app.route('/ajouter_remplacement', methods=['POST'])
 def ajouter_remplacement():
     jour = request.form['jour']
