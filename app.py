@@ -144,57 +144,6 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/remplacement')
-def index():
-    type_user = 'Gestionnaire'  # Gestionnaire ou Personnel
-    remplacements = []
-    today = datetime.now().strftime('%d/%m/%Y')
-    
-    # Lecture des données du fichier CSV et suppression des anciennes dates
-    lignes_a_garder = []
-    try:
-        with open('besoins.csv', 'r', encoding='utf-8') as f:
-            reader = csv.reader(f, delimiter=';')
-            for row in reader:
-                if len(row) == 6 and row[0] >= today:  # Vérifier la date
-                    lignes_a_garder.append(row)
-                    remplacements.append({
-                        'date': row[0],
-                        'jour': row[1],
-                        'horaire': row[2],
-                        'matiere': row[3],
-                        'classe': row[4],
-                        'status': row[5]
-                    })
-        
-        # Réécriture du fichier CSV sans les anciennes dates
-        with open('besoins.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f, delimiter=';')
-            writer.writerows(lignes_a_garder)
-    except FileNotFoundError:
-        pass
-    
-    return render_template('remplacement.html', type_user=type_user, remplacements=remplacements)
-
-@app.route('/ajouter_remplacement', methods=['POST'])
-def ajouter_remplacement():
-    # Récupérer la date saisie et la reformater
-    date_saisie = request.form['date']
-    date_ajout = datetime.strptime(date_saisie, '%Y-%m-%d').strftime('%d/%m/%Y')  # Reformatage au format JJ/MM/AAAA
-    
-    jour = request.form['jour']
-    horaire = request.form['horaire']
-    matiere = request.form['matiere']
-    classe = request.form['classe']
-    status = 'Disponible'  # Statut défini automatiquement à 'D'
-    
-    # Ajout des données au fichier CSV
-    with open('besoins.csv', 'a', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f, delimiter=';')
-        writer.writerow([date_ajout, jour, horaire, matiere, classe, status])
-    
-    return redirect('/remplacement')
-
 
 
 @app.route('/deplacement', methods=['GET', 'POST'])
