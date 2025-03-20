@@ -179,7 +179,16 @@ form {
     letter-spacing: 2px; /* Espacement entre les lettres */
     color: #fff; /* Blanc pour un meilleur contraste */
 }
-
+#apropos {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+    flex-direction: column; /* Aligne les éléments les uns sous les autres */
+    text-align: center; /* Assure que le texte est centré */
+    padding: 80px 0; /* Ajouter de l'espace autour de la section */
+    margin-top: 80px; /* Décalage pour éviter la superposition avec la navigation */
+    
+}
 /* Text 'A propos' */
 #apropos p {
     font-size: 1.8rem; /* Agrandir le texte */
@@ -191,13 +200,60 @@ form {
     background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
     border-radius: 10px;
 }
+
+/* Section 'Déplacement' */
+#deplacement {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+    flex-direction: column; /* Aligne les éléments les uns sous les autres */
+    text-align: center; /* Assure que le texte est centré */
+    padding: 80px 0; /* Ajouter de l'espace autour de la section */
+    margin-top: 80px; /* Décalage pour éviter la superposition avec la navigation */
+    
+}
+
+/* Styles pour le bouton centré */
+#deplacement .btn-xl {
+    margin-top: 20px; /* Un peu d'espace au-dessus du bouton */
+    display: inline-block; /* Assure que le bouton se comporte comme un élément en ligne */
+}
+
+#deplacement p {
+    font-size: 1.8rem; /* Agrandir le texte */
+    line-height: 1.6; /* Améliorer l'espacement des lignes */
+    color: #ddd; /* Couleur claire pour un meilleur contraste */
+    max-width: 800px; /* Limiter la largeur du texte */
+    margin: 20px auto; /* Centrer le texte */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fond semi-transparent */
+    border-radius: 10px;
+}
+
+
+/* Section 'deplacement' */
+#deplacement .section-heading {
+    font-size: 3.5rem; /* Agrandir la taille du titre 'Contactez nous' */
+    letter-spacing: 2px; /* Espacement entre les lettres */
+    color: #fff; /* Blanc pour un meilleur contraste */
+}
+
 /* Section 'Contactez nous' */
 #contact .section-heading {
     font-size: 3.5rem; /* Agrandir la taille du titre 'Contactez nous' */
     letter-spacing: 2px; /* Espacement entre les lettres */
     color: #fff; /* Blanc pour un meilleur contraste */
 }
-
+#contact {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre le contenu verticalement */
+    flex-direction: column; /* Aligne les éléments les uns sous les autres */
+    text-align: center; /* Assure que le texte est centré */
+    padding: 80px 0; /* Ajouter de l'espace autour de la section */
+    margin-top: 80px; /* Décalage pour éviter la superposition avec la navigation */
+    
+}
 /* Text 'Contactez nous' */
 #contact h3.section-subheading {
     font-size: 1.8rem; /* Agrandir la taille du texte sous le titre */
@@ -262,22 +318,6 @@ button.coco:hover {
     background: #ff4f8b;
 }
 
-/* Animation stylée */
-@keyframes apparition {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.container.pcpei {
-    animation: apparition 2s ease-out;
-}
-
 /* Style pour le lien "Changer mon avatar" */
 a.coco {
     display: inline-block; /* Permet de traiter le lien comme un bouton */
@@ -295,4 +335,18 @@ a.coco:hover {
     background: #ff4f8b; /* Changer la couleur au survol */
     transform: scale(1.05); /* Légère animation d'agrandissement */
     box-shadow: 0 0 10px rgba(0, 255, 171, 0.3); /* Légère ombre portée au survol */
+/* Animation stylée */
+@keyframes apparition {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container.pcpei {
+    animation: apparition 2s ease-out;
 }

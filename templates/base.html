@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Site web de la section BTS Ciel (Cybersécurité, Informatique et réseau, Electronique) du lycée Raymond Queneau Yvetot">
-        <meta name="author" content="BTS CIEL Queneau">
+        <meta charset="utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+        <meta name="description" content="Site web de la section BTS Ciel (Cybersécurité, Informatique et réseau, Electronique) du lycée Raymond Queneau Yvetot" >
+        <meta name="author" content="BTS CIEL Queneau" >
         <title>{% block title %}{% endblock %}BTS CIEL - Site Intranet</title>
-        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico">
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" >
+        <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css">
@@ -20,9 +22,9 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#apropos">A propos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">Déplacement</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">Remplacement</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/">Cantine</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/deplacement">Déplacement</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/remplacement">Remplacement</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/cantine">Cantine</a></li>
                         <li class="nav-item"><a class="nav-link" href="/login">Se connecter</a></li>
                         {% if 'login' in session %}
                             <li class="nav-item">
