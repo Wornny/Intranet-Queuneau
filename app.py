@@ -182,8 +182,25 @@ def ajouter_remplacement():
 
 @app.route('/deplacement', methods=['GET', 'POST'])
 def deplacement_post():
+    if session['type_user'] == 'personnel' :
 
-    return render_template('deplacement.html',)
+        return render_template('deplacement.html',)
+    
+    elif session['type_user'] == 'gestionnaire':
+
+        messages_lus = []
+
+    #écriture du fichier csv par une boucle 
+        with open('message.csv', mode = 'r') as file:
+            csv_reader_admin = csv.reader(file)
+            
+            for row in csv_reader_admin:
+                print(row)
+                messages_lus.append(row)
+            return render_template('deplacement_admin.html', messages_lus = messages_lus)
+    else:
+
+        return redirect('/')
 
 #Route pour l'affichage du formulaire (GET) ou le traitement du formulaire (POST)
 #Avec la méthode POST les données du formulaire sont extraites et ensuite sauvegardées
