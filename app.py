@@ -201,5 +201,19 @@ def save_message():
 
     return redirect('/')
 
+@app.route('/admin', methods=['GET'])
+def admin():
+        messages_lus = []
+
+#écriture du fichier csv par une boucle 
+        with open('message.csv', mode = 'r') as file:
+            csv_reader_admin = csv.reader(file)
+            
+            for row in csv_reader_admin:
+                print(row)
+                messages_lus.append(row)
+            return render_template('admin.html', messages_lus = messages_lus)
+
+
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True)
