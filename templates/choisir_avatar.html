@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Choisir un avatar{% endblock %}
+
+{% block content %}
+    <div class="container pcpei">
+        <h1 class="coco">Choisir votre avatar</h1>
+        <form action="/choisir_avatar" method="POST" enctype="multipart/form-data">
+            <label for="avatar" class="coco">Sélectionnez une photo de profil :</label>
+            <input type="file" name="avatar" id="avatar" required><br>
+            <button type="submit" class="coco">Enregistrer mon avatar</button>
+        </form>
+    </div>
+{% endblock %}

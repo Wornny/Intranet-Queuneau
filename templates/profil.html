@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+    <div class="container pcpei">
+        <h1 class="coco">Bienvenue {{ login }}</h1>
+        {% if avatar_path %}
+            <img src="{{ url_for('static', filename='avatars/' + login + '.jpg') }}" alt="Avatar" class="avatar">
+        {% else %}
+            <img src="{{ url_for('static', filename='assets/default_avatar.jpg') }}" alt="Avatar" class="avatar">
+        {% endif %}
+        <p><a href="/choisir_avatar" class="coco btn-xl">Changer mon avatar</a></p>
+    </div>
+{% endblock %}
