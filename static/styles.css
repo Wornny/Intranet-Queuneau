@@ -335,6 +335,7 @@ a.coco:hover {
     background: #ff4f8b; /* Changer la couleur au survol */
     transform: scale(1.05); /* Légère animation d'agrandissement */
     box-shadow: 0 0 10px rgba(0, 255, 171, 0.3); /* Légère ombre portée au survol */
+}
 /* Animation stylée */
 @keyframes apparition {
     from {
