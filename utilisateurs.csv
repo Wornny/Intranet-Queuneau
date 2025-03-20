@@ -1,8 +1,8 @@
-login,password,email
-corentin,azerty*123,
-julien,azerty*123,
-leo,azerty*123,
-matthieu,azerty*123,
-manuel,azerty*123,
-mael,azerty*123,
-raphael,azerty*123,
+login,password,email,type_user
+corentin,pcpei,corentin@gmail.com,etudiant
+julien,azerty*123,julien@gmail.com,personnel
+leo,azerty*123,leo@gmail.com,etudiant
+matthieu,azerty*123,matthieu@gmail.com,gestionnaire
+manuel,azerty*123,manuel@gmail.com,personnel
+mael,azerty*123,mael@gmail.com,etudiant
+raphael,azerty*123,raphael@gmail.com,personnel

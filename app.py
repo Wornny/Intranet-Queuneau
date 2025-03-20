@@ -18,13 +18,14 @@ def lire_utilisateurs():
         reader = csv.reader(file)
         next(reader)  # Ignorer l'en-tête
         for row in reader:
-            if len(row) == 2:  # Si l'email n'est pas encore présent, on a seulement login et password
-                login, password = row
-                utilisateurs[login] = {"password": password, "email": ""}
-            elif len(row) == 3:  # Si l'email est déjà dans le CSV
+            if len(row) == 4:  # Ajouter la gestion du type_user
+                login, password, email, type_user = row
+                utilisateurs[login] = {"password": password, "email": email, "type_user": type_user}
+            elif len(row) == 3:  # Cas sans type_user
                 login, password, email = row
-                utilisateurs[login] = {"password": password, "email": email}
+                utilisateurs[login] = {"password": password, "email": email, "type_user": "personnel"}  # Par défaut "personnel"
     return utilisateurs
+
 
 # Sauvegarde des utilisateurs dans le fichier CSV
 def sauvegarder_utilisateurs(utilisateurs):
@@ -77,39 +78,31 @@ def message():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        login_input = request.form['login']
+        email_input = request.form['email']
         password = request.form['password']
-        email = request.form['email']  # Récupère l'email saisi
         utilisateurs = lire_utilisateurs()
 
-        # Vérifier si l'identifiant existe et que le mot de passe correspond
         for login, data in utilisateurs.items():
-            if login_input == login and data["password"] == password:
-                # Si l'email est vide pour cet utilisateur, ajouter l'email saisi
-                if not data["email"]:
-                    utilisateurs[login]["email"] = email
-                    sauvegarder_utilisateurs(utilisateurs)
+            if data["email"] == email_input and data["password"] == password:
+                session['login'] = login
+                session['email'] = email_input
+                session['type_user'] = data.get('type_user', 'personnel')  # Par défaut 'personnel'
 
-                # Vérifier si l'email saisi correspond à celui stocké dans le CSV
-                if data["email"] == email:
-                    session['login'] = login
+                avatar_path = os.path.join(AVATAR_FOLDER, f"{login}.jpg")
+                if os.path.exists(avatar_path):
+                    session['avatar'] = avatar_path
 
-                    # Vérifier si un avatar existe déjà et le charger
-                    avatar_path = os.path.join(AVATAR_FOLDER, f"{login}.jpg")
-                    if os.path.exists(avatar_path):
-                        session['avatar'] = avatar_path
-
-                    # Rediriger vers le profil si le mot de passe n'est pas encore par défaut
-                    if data["password"] == "azerty*123":
-                        return redirect(url_for('changer_mot_de_passe'))
-                    else:
-                        return redirect(url_for('profil'))
+                if data["password"] == "azerty*123":
+                    return redirect(url_for('changer_mot_de_passe'))
                 else:
-                    return "Email incorrect", 401
+                    return redirect(url_for('profil'))
 
-        return "Identifiants incorrects", 401
+        return "Email ou mot de passe incorrect", 401
 
     return render_template('login.html')
+
+
+
 
 @app.route('/changer_mot_de_passe', methods=['GET', 'POST'])
 def changer_mot_de_passe():
@@ -326,6 +319,18 @@ def vote(plat_index, vote_type):
 
     return redirect(url_for('cantine'))
 
+@app.route('/admin', methods=['GET'])
+def admin():
+        messages_lus = []
+
+#écriture du fichier csv par une boucle 
+        with open('message.csv', mode = 'r') as file:
+            csv_reader_admin = csv.reader(file)
+            
+            for row in csv_reader_admin:
+                print(row)
+                messages_lus.append(row)
+            return render_template('admin.html', messages_lus = messages_lus)
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=8000, debug=True)

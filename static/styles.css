@@ -400,3 +400,37 @@ a.coco:hover {
     border: none;
     cursor: pointer;
 }
+
+.message-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.message-table th, .message-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.message-table th {
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+}
+
+.message-table tr:nth-child(even) {
+    background-color: #000000;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.no-messages {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+    margin-top: 20px;
+}
