@@ -351,3 +351,52 @@ a.coco:hover {
 .container.pcpei {
     animation: apparition 2s ease-out;
 }
+
+/* Style général du formulaire Deplacement.html*/
+/* Espacement entre les lignes Deplacement.html*/
+.row.mb-3-Deplacement {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* Ajustement des colonnes Deplacement.html*/
+.col-md-6-Deplacement,
+.col-md-4-Deplacement,
+.col-md-3-Deplacement {
+    flex: 1;
+    min-width: 250px;
+    margin: 5px;
+}
+
+/* Ajustement des champs d'heure pour être proches Deplacement.html */
+.col-md-3-Deplacement:nth-child(2), 
+.col-md-3-Deplacement:nth-child(3),
+.col-md-3-Deplacement:nth-child(4), 
+.col-md-3-Deplacement:nth-child(5) {
+    flex: 0.5;
+}
+
+/* Style des champs Deplacement.html*/
+.form-control-Deplacement {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Style du bouton Deplacement.html*/
+.text-center-Deplacement {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
