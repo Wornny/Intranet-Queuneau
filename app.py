@@ -68,6 +68,11 @@ def profil():
 def bonjour_post():
     return render_template('index.html')
 
+@app.route('/save', methods=['POST'])
+def save_message():  
+
+    return f"Merci pour votre soumission !"  # message de remerciement
+
 # Connexion avec identifiant et mot de passe
 @app.route('/login', methods=['GET', 'POST'])
 def login():
