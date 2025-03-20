@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tableau de Remplacement</title>
+{% extends "base.html" %}
+
+{% block title %}Tableau de Remplacement{% endblock %}
+
+{% block content %}
+    <h2>Tableau de Remplacement</h2>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,10 +29,7 @@
             margin-right: 10px;
         }
     </style>
-</head>
-<body>
-    <h2>Tableau de Remplacement</h2>
-    
+
     <!-- Tableau des horaires -->
     <table id="horaireTable">
         <thead>
@@ -155,7 +153,6 @@
                 <option value="14">14h15 - 15h15</option>
                 <option value="15">15h30 - 16h30</option>
                 <option value="16">16h30 - 17h30</option>
-                <!-- Ajoute d'autres horaires si nécessaire -->
             </select>
         </label>
         
@@ -164,5 +161,4 @@
         <label>Status: <input type="text" name="status" required></label>
         <button type="submit">Soumettre</button>
     </form>
-</body>
-</html>
+{% endblock %}
