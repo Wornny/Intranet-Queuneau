@@ -68,6 +68,10 @@ def profil():
 def bonjour_post():
     return render_template('index.html')
 
+@app.route('/message', methods=['POST'])
+def message():  
+
+    return render_template('message.html')
 
 # Connexion avec identifiant et mot de passe
 @app.route('/login', methods=['GET', 'POST'])
