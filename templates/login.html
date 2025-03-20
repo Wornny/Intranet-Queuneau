@@ -8,10 +8,13 @@
         <form action="/login" method="post">
             <label for="login">Identifiant :</label>
             <input type="text" id="login" name="login" class="coco" required><br>
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" class="coco" required><br>
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" class="coco" required><br>
             <button type="submit" class="coco">Se Connecter</button>
         </form>
         <p>L'identifiant doit être saisi en minuscule et sans accent !</p>
+        <p>L'email doit être valide (ex: exemple@email.com)  !</p>
     </div>
 {% endblock %}
