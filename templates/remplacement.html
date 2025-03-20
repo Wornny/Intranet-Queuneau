@@ -31,103 +31,28 @@
     </style>
 
     <!-- Tableau des horaires -->
-    <table id="horaireTable">
-        <thead>
-            <tr>
-                <th>Horaire</th>
-                <th>Lundi</th>
-                <th>Mardi</th>
-                <th>Mercredi</th>
-                <th>Jeudi</th>
-                <th>Vendredi</th>
-                <th>Samedi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>8h00 - 9h00</td>
-                <td id="lundi_8">Francais</td>
-                <td id="mardi_8"></td>
-                <td id="mercredi_8"></td>
-                <td id="jeudi_8"></td>
-                <td id="vendredi_8"></td>
-                <td id="samedi_8"></td>
-            </tr>
-            <tr>
-                <td>9h00 - 10h00</td>
-                <td id="lundi_9">Mathématique</td>
-                <td id="mardi_9"></td>
-                <td id="mercredi_9"></td>
-                <td id="jeudi_9"></td>
-                <td id="vendredi_9"></td>
-                <td id="samedi_9"></td>
-            </tr>
-            <tr>
-                <td>10h15 - 11h15</td>
-                <td id="lundi_10"></td>
-                <td id="mardi_10"></td>
-                <td id="mercredi_10"></td>
-                <td id="jeudi_10"></td>
-                <td id="vendredi_10"></td>
-                <td id="samedi_10"></td>
-            </tr>
-            <tr>
-                <td>11h15 - 12h15</td>
-                <td id="lundi_11"></td>
-                <td id="mardi_11">Histoire</td>
-                <td id="mercredi_11"></td>
-                <td id="jeudi_11"></td>
-                <td id="vendredi_11"></td>
-                <td id="samedi_11"></td>
-            </tr>
-            <tr>
-                <td>12h15 - 13h15</td>
-                <td id="lundi_12">Mathématique</td>
-                <td id="mardi_12"></td>
-                <td id="mercredi_12"></td>
-                <td id="jeudi_12"></td>
-                <td id="vendredi_12"></td>
-                <td id="samedi_12"></td>
-            </tr>
-            <tr>
-                <td>13h15 - 14h15</td>
-                <td id="lundi_13"></td>
-                <td id="mardi_13"></td>
-                <td id="mercredi_13"></td>
-                <td id="jeudi_13"></td>
-                <td id="vendredi_13"></td>
-                <td id="samedi_13"></td>
-            </tr>
-            <tr>
-                <td>14h15 - 15h15</td>
-                <td id="lundi_14"></td>
-                <td id="mardi_14"></td>
-                <td id="mercredi_14"></td>
-                <td id="jeudi_14"></td>
-                <td id="vendredi_14"></td>
-                <td id="samedi_14"></td>
-            </tr>
-            <tr>
-                <td>15h30 - 16h30</td>
-                <td id="lundi_15"></td>
-                <td id="mardi_15">Sport</td>
-                <td id="mercredi_15"></td>
-                <td id="jeudi_15"></td>
-                <td id="vendredi_15"></td>
-                <td id="samedi_15"></td>
-            </tr>
-            <tr>
-                <td>16h30 - 17h30</td>
-                <td id="lundi_16">Physique</td>
-                <td id="mardi_16"></td>
-                <td id="mercredi_16"></td>
-                <td id="jeudi_16"></td>
-                <td id="vendredi_16"></td>
-                <td id="samedi_16"></td>
-            </tr>
-            <!-- Ajoute d'autres lignes pour chaque horaire si nécessaire -->
-        </tbody>
+    <!-- Tableau des horaires généré dynamiquement -->
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Jour</th>
+            <th>Horaire</th>
+            <th>Matière</th>
+            <th>Classe</th>
+            <th>Status</th>
+        </tr>
+        {% for row in remplacements %}
+        <tr>
+            <td>{{ row.date }}</td>
+            <td>{{ row.jour }}</td>
+            <td>{{ row.horaire }}</td>
+            <td>{{ row.matiere }}</td>
+            <td>{{ row.classe }}</td>
+            <td>{{ row.status }}</td>
+        </tr>
+        {% endfor %}
     </table>
+    
 
     
     {% if type_user == "Gestionnaire" %}
@@ -143,24 +68,29 @@
                 <option value="samedi">Samedi</option>
             </select>
         </label>
+    
         <label>Horaire: 
             <select name="horaire">
-                <option value="8">8h00 - 9h00</option>
-                <option value="9">9h00 - 10h00</option>
-                <option value="10">10h15 - 11h15</option>
-                <option value="11">11h15 - 12h15</option>
-                <option value="12">12h15 - 13h15</option>
-                <option value="13">13h15 - 14h15</option>
-                <option value="14">14h15 - 15h15</option>
-                <option value="15">15h30 - 16h30</option>
-                <option value="16">16h30 - 17h30</option>
+                <option value="M1">M1 (8h00 - 9h00)</option>
+                <option value="M2">M2 (9h00 - 10h00)</option>
+                <option value="M3">M3 (10h15 - 11h15)</option>
+                <option value="M4">M4 (11h15 - 12h15)</option>
+                <option value="M5">M5 (12h15 - 13h15)</option>
+                <option value="M6">M6 (13h15 - 14h15)</option>
+                <option value="M7">M7 (14h15 - 15h15)</option>
+                <option value="M8">M8 (15h30 - 16h30)</option>
+                <option value="M9">M9 (16h30 - 17h30)</option>
             </select>
         </label>
-        
+    
         <label>Matière: <input type="text" name="matiere" required></label>
         <label>Classe: <input type="text" name="classe" required></label>
         <label>Status: <input type="text" name="status" required></label>
+        
         <button type="submit">Soumettre</button>
     </form>
+    
+    
+    
     {% endif %}
 {% endblock %}
