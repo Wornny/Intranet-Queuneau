@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Messages reçus{% endblock %}
+
+
+{% block header %}Messages reçus{% endblock %}
+
+{% block content %}
+    <h2 class="title">déplacement</h2>
+
+    {% if messages_lus %}
+        <table class="message-table">
+            <thead>
+                <tr>
+                    <th>date</th>
+                    <th>Heure de départ résidence personnel</th>
+                    <th>Heure d'arrivée entreprise</th>
+                    <th>Heure de départ entreprise</th>
+                    <th>heure d'arrivée résidence personnel</th>
+                    <th>adresse personnel</th>
+                    <th>adresse secondaire personnel</th>
+                    <th>ville de résidence personnel</th>
+                    <th>code postal</th>
+                    <th>puissance fiscale de la voiture</th>
+                    <th>Objet de déplacement</th>
+                    <th>ville de l'entreprise</th>
+                    <th>entreprise</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages_lus %}
+                    <tr>
+                        <td>{{ message[8] }}</td>
+                        <td>{{ message[9] }}</td>
+                        <td>{{ message[10] }}</td>
+                        <td>{{ message[11] }}</td>
+                        <td>{{ message[12] }}</td>
+                        <td>{{ message[0] }}</td>
+                        <td>{{ message[1] }}</td>
+                        <td>{{ message[3] }}</td>
+                        <td>{{ message[2] }}</td>
+                        <td>{{ message[4] }}</td>
+                        <td>{{ message[5] }}</td>
+                        <td>{{ message[6] }}</td>
+                        <td>{{ message[7] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="no-messages">Aucun message reçu pour le moment.</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,198 @@
+div.pagination {
+	display:block;
+	text-align:center;
+}
+
+div.pagination img {
+	border:0pt none;
+	margin:0pt;
+	padding:0pt;
+}
+
+div.pagination a.decoupe_img {
+	border:0pt none;
+}
+
+span.cs_pagination_off {
+	color:lightgrey;
+	font-weight:bold;
+	text-decoration:underline;
+}
+
+div.onglets_print {
+	margin:1em;
+	padding:0.6em;
+	border:1px dashed ;
+}
+
+div.onglets_print h4 {
+	margin-top:0px;
+	margin-bottom:0.6em;
+}
+
+div.onglets_bloc {
+	position:relative;
+	width:100%;
+	clear:both;
+}
+
+div.onglets_bloc h2.onglets_titre a {
+	text-decoration:none;
+	height:22px;
+	color:black;
+}
+
+div.onglets_bloc h2.onglets_titre {
+	height:20px;
+-moz-border-radius-topleft:3px;
+-moz-border-radius-topright:6px;
+	background-color:#f2f2f2;
+	color:black;
+	position:relative;
+	top:-1px;
+	display:inline;
+	float:left;
+	clear:none;
+	overflow:hidden;
+	cursor:pointer;
+	margin:1px -1px 1px 0px;
+	padding:0px 0.6em;
+	border:1px solid rgb( 145, 155, 156 );
+	
+	z-index:11;
+	white-space:nowrap;
+	text-align:center;
+	font-weight:normal;
+	font-size:88%;
+}
+
+div.onglets_bloc h2.onglets_titre.selected {
+	height:22px;
+	background-color:white;
+	border-top:3px solid #8B6F92;
+	z-index:11;
+	top:-3px;
+	margin:1px -1px -2px 0px;
+	border-bottom-width:0px;
+	cursor:default;
+}
+
+div.onglets_bloc h2.onglets_titre.selected a {
+	color:black;
+	cursor:default;
+}
+
+div.onglets_bloc h2.hover a {
+	color:blue;
+}
+
+div.onglets_bloc .onglets_liste {
+	white-space:nowrap;
+}
+
+div.onglets_bloc .onglets_contenu {
+	display:none;
+	clear:both;
+	border:1px solid rgb( 145, 155, 156 );
+	background:rgb( 252, 252, 254 );
+	z-index:10;
+	position:relative;
+	top:-3px;
+	padding:0.6em;
+}
+
+div.onglets_bloc .onglets_contenu.selected {
+	display:block;
+	overflow:hidden;
+}
+
+/* Pour info : enveloppe_mails = -1 */
+
+sup, sup.typo_exposants { font-size:78%; font-variant:inherit; line-height:inherit; vertical-align:23%; }
+
+	
+	
+	
+	
+
+div.cs_sommaire {
+	display:block;
+	float:right;
+	margin-left:1em;
+	margin-right:0.4em;
+	overflow:auto;
+	z-index:100;
+	max-height:350px;
+	text-align:left;
+}
+
+a.sommaire_ancre {
+	background:transparent url(https://queneau.lycee.ac-normandie.fr/prive/images/deplierbas.svg) no-repeat scroll left center;
+	background-size: 12px;
+	padding-left:10px;
+	text-decoration:none !important;
+}
+
+div.cs_sommaire a:after {
+	display:none;
+}
+
+div.cs_sommaire_avec_fond {
+	background: transparent url(https://queneau.lycee.ac-normandie.fr/plugins/administration/couteau_suisse/img/sommaire/coin.gif) no-repeat scroll left top;
+	border-right: 1px solid rgb(153, 153, 153);
+	border-bottom: 1px solid rgb(153, 153, 153);
+	padding-bottom:0.1em;
+}
+
+div.cs_sommaire_sans_fond {
+	border: thin solid gray;
+	background-color: white;
+}
+
+div.cs_sommaire_inner {
+	margin: 3pt;
+}
+
+div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_fond {
+	border-bottom: 1px dotted silver;
+	line-height: 1;
+	position: inherit;
+	font-weight: bold;
+	text-align: center;
+}
+
+div.cs_sommaire_titre_avec_fond {
+	margin-left: 15px;
+}
+
+div.cs_sommaire ul{
+	margin: 0.3em 0.5em 0.1em 0.7em;
+	padding: 0pt;
+	font-size: 84%;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+
+div.cs_sommaire ul li{
+	margin: 0pt;
+	padding: 0pt;
+	list-style-image: none;
+	list-style-position: outside;
+	list-style-type: none;
+}
+
+div.cs_sommaire_titre_avec_fond, div.cs_sommaire_titre_sans_fond {
+	background:transparent url(https://queneau.lycee.ac-normandie.fr/prive/images/deplierbas.svg) no-repeat scroll right center;
+	background-size: 18px;
+	cursor:pointer;
+	padding: 0.3em 18px;
+}
+
+div.cs_sommaire_replie {
+	background:transparent url(https://queneau.lycee.ac-normandie.fr/prive/images/deplierhaut.svg) no-repeat scroll right center;
+	background-size: 18px;
+	border:none;
+}
+
+.cs_sommaire_invisible{ display:none; }
