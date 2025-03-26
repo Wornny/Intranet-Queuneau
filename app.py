@@ -1,6 +1,8 @@
 import csv
+import random
 import os
 from flask import Flask, request, render_template, redirect, session, url_for
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "MaSuperCleSecrete"
@@ -35,6 +37,17 @@ def sauvegarder_utilisateurs(utilisateurs):
         for login, data in utilisateurs.items():
             writer.writerow([login, data["password"], data["email"]])
 
+# fonction pour générer une question aléatoire
+def generate_question():
+    questions = [
+        {"question": "Le zèbre est noir et ?", "reponse": "blanc"},
+        {"question": "Combien font 17 x 35 ?", "reponse": "595"},
+        {"question": "Quelle est la dérivé de 6x + 2 ?", "reponse": "6"},
+        {"question": "Qui a gagné la dernière ligue des champions ?", "reponse": "real madrid"},
+        {"question": "De quelle couleur est une orange ?", "reponse": "orange"}
+    ]
+    return random.choice(questions)           
+
 # Gérer le téléchargement de l'avatar
 @app.route('/choisir_avatar', methods=['GET', 'POST'])
 def choisir_avatar():
@@ -67,7 +80,8 @@ def profil():
 
 @app.route('/', methods=['GET', 'POST'])
 def bonjour_post():
-    return render_template('index.html')
+    q = generate_question()
+    return render_template('index.html', question=q["question"], reponse=q["reponse"])
 
 @app.route('/message', methods=['POST'])
 def message():  
@@ -129,56 +143,8 @@ def logout():
     session.pop('avatar', None)  # Supprimer l'avatar de la session
     return redirect(url_for('login'))
 
-@app.route('/remplacement')
-def index():
-    type_user = 'Gestionnaire'  # Exemple, peut être dynamique
 
-    # Lire le fichier CSV
-    remplacements = []
-    try:
-        with open('besoins.csv', 'r', newline='', encoding='utf-8') as f:
-            reader = csv.reader(f, delimiter=';')
-            next(reader)  # Ignore l'en-tête du CSV
-            for row in reader:
-                if len(row) == 6:  # Vérifier qu'il y a bien 6 colonnes
-                    date, jour, horaire, matiere, classe, status = row  # Prendre toutes les colonnes
-                    remplacements.append({
-                        'date': date,  # Ajout de la date (si besoin)
-                        'jour': jour,
-                        'horaire': horaire,
-                        'matiere': matiere,
-                        'classe': classe,
-                        'status': status
-                    })
-    except FileNotFoundError:
-        pass  # Si le fichier n'existe pas encore, on ne fait rien
 
-    return render_template('remplacement.html', type_user=type_user, remplacements=remplacements)
-@app.route('/ajouter_remplacement', methods=['POST'])
-def ajouter_remplacement():
-    jour = request.form['jour']
-    horaire = request.form['horaire']
-    matiere = request.form['matiere']
-    classe = request.form['classe']
-    status = request.form['status']
-
-    # Remplacement du numéro de l'horaire par le jour réel
-    jours_mapping = {
-        'lundi': "Lundi",
-        'mardi': "Mardi",
-        'mercredi': "Mercredi",
-        'jeudi': "Jeudi",
-        'vendredi': "Vendredi",
-        'samedi': "Samedi"
-    }
-    horaire = jours_mapping.get(jour, jour)
-
-    # Ajout des données au fichier CSV
-    with open('besoins.csv', 'a', newline='', encoding='utf-8') as f:
-        writer = csv.writer(f, delimiter=';')
-        writer.writerow([jour, horaire, matiere, classe, status])
-
-    return redirect('/remplacement')
 
 @app.route('/deplacement', methods=['GET', 'POST'])
 def deplacement_post():
@@ -243,34 +209,57 @@ def save_message():
 
     return redirect('/')
 
-@app.route('/remplacement', methods=['GET', 'POST'])
-def remplacement():
-    if request.method == 'POST': 
-       
-        créneau = request.form['Créneau']
-        classe = request.form['classe']
-        matière = request.form['Matière']
-        mail_personnel = request.form ['Mail_personnel']
+@app.route('/remplacement')
+def index():
+    type_user = 'Gestionnaire'  # Gestionnaire ou Personnel
+    remplacements = []
+    today = datetime.now().strftime('%d/%m/%Y')
+    
+    # Lecture des données du fichier CSV et suppression des anciennes dates
+    lignes_a_garder = []
+    try:
+        with open('besoins.csv', 'r', encoding='utf-8') as f:
+            reader = csv.reader(f, delimiter=';')
+            for row in reader:
+                if len(row) == 6 and row[0] >= today:  # Vérifier la date
+                    lignes_a_garder.append(row)
+                    remplacements.append({
+                        'date': row[0],
+                        'jour': row[1],
+                        'horaire': row[2],
+                        'matiere': row[3],
+                        'classe': row[4],
+                        'status': row[5]
+                    })
         
-        new_message = [{'Créneau': créneau, 'Classe': classe, 'Matière': matière, 'mail_personnel': mail_personnel}]
-        
-       
-        with open('remplacement.csv', mode='a', newline='', encoding='utf-8') as csvfile:
-            fieldnames = new_message[0].keys()
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        # Réécriture du fichier CSV sans les anciennes dates
+        with open('besoins.csv', 'w', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f, delimiter=';')
+            writer.writerows(lignes_a_garder)
+    except FileNotFoundError:
+        pass
+    
+    return render_template('remplacement.html', type_user=type_user, remplacements=remplacements)
 
-            
-            csvfile.seek(0, 2)  
-            if csvfile.tell() == 0:
-                writer.writeheader()
+@app.route('/ajouter_remplacement', methods=['POST'])
+def ajouter_remplacement():
+    # Récupérer la date saisie et la reformater
+    date_saisie = request.form['date']
+    date_ajout = datetime.strptime(date_saisie, '%Y-%m-%d').strftime('%d/%m/%Y')  # Reformatage au format JJ/MM/AAAA
+    
+    jour = request.form['jour']
+    horaire = request.form['horaire']
+    matiere = request.form['matiere']
+    classe = request.form['classe']
+    status = 'Disponible'  # Statut défini automatiquement à 'D'
+    
+    # Ajout des données au fichier CSV
+    with open('besoins.csv', 'a', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f, delimiter=';')
+        writer.writerow([date_ajout, jour, horaire, matiere, classe, status])
+    
+    return redirect('/remplacement')
 
-            writer.writerows(new_message)
-
-        
-        return redirect(url_for('confirmation', créneau=créneau, classe=classe, matière=matière, mail_personnel=mail_personnel))
-
-   
-    return render_template('remplacement.html')  
 
 @app.route('/confirmation')
 def confirmation():
